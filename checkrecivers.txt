@@ -1,0 +1,20 @@
+bool checkRecivers() {
+  char const magicWord[]="KnockKnock";
+  char const truePhraseWord[]="WhoseThere";
+radio.stopListening();
+radio.write(&magicWord,sizeof(magicWord));
+delay(5);
+radio.startListening();
+delay(5);
+if(radio.available()){
+  char phraseWord[12]="";
+  radio.read(&phraseWord,sizeof(phraseWord));
+  Serial.println("inavailableREad");
+    if(strcmp(phraseWord,truePhraseWord)==0){
+      Serial.println("inSTRCMP");
+      return true;
+    }
+return false;}
+  Serial.println("inloop2");
+return false;
+}

@@ -1,0 +1,1 @@
+from machine import Pinimport timeled=Pin(15,Pin.OUT)led2=Pin(13,Pin.OUT)i=0while True:  led.value(1)  time.sleep(0.2)  led.value(0)  time.sleep(0.2)  led2.value(1)  time.sleep(0.2)  led2.value(0)  time.sleep(0.2)
