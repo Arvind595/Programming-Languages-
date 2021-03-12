@@ -1,0 +1,55 @@
+//C Program To find N point DFT of a given sequence
+#define CHIP_6713 1
+#include "dsk6713.h"
+#include "dsk6713_aic23.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "math.h"
+#define pi 3.1415
+void main(void){
+int n,k,z,q,i,N,E,R,W;
+float x[100],XImag[100],XReal[100],XMag[100],XPhase[100];
+
+	printf("enter the lenght of x");
+	scanf("%d",&n);
+
+	printf("enter the elements of x");
+	for ( i=0;i<n;i++){
+		scanf("%f",x[i]);
+	}
+
+	printf("enter the lenght of DFT");
+		scanf("%d",&N);
+if(N>n) {
+	for (k=n;k<N;k++){
+		x[k]=0;
+	}
+}
+	printf("printing the zero padded seq");
+for (z=0;z<=N;z++)
+{
+	printf("/t%f",x[z]);
+
+}
+
+// performing dft by splitting real and imaginary
+//Computing DFT
+	for(q=0;q<N;q++)
+	{
+		XReal[q]=0;
+		XImag[q]=0;
+		for(n=0;n<N;n++)
+		{
+			XReal[q]+=x[n]*cos(2*pi/N*q*n);		//real part
+			XImag[q]-=x[n]*sin(2*pi/N*q*n);		//imaginary part
+		}
+	}
+	//Printing output
+		printf("\nThe DFT computed is\n");
+		for(W=0;W<n;W++)
+			printf("(%f)+1j*(%f)\n",XReal[W],XImag[W]);
+
+		for(E=0;E<n;E++)
+		{
+			XMag[E]=sqrt(pow(XReal[E],2)+pow(XImag[E],2));	//magnitude
+			XPhase[E]=atan2(XImag[E],XReal[E]);					//phase
